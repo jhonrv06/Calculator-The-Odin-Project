@@ -2,6 +2,7 @@ const DISPPLAY = document.querySelector("#calculator__display");
 const BUTTONS = document.querySelectorAll(".buttons");
 let values = []
 
+
 function validateOperation(value1,sing,value2){
     return (sing == "+") ? value1+value2:
     (sing == "-")? value1-value2:
@@ -12,7 +13,7 @@ function validateOperation(value1,sing,value2){
 
 function saveValue(value){
     let resultArray = values.push(value)
-
+    console.log(values)
 }
 
 function calculateOtion(){
@@ -22,13 +23,17 @@ function calculateOtion(){
 
 
 function calculateValue(){
-    //let data = ["8","3","1","+","4","6"]
-    let data = ["+"]
-    let value1 = 8 + 7;
-    
-    let totalarr = Number(data.join(""));
+    let data = ['5', '8', '6', '+', '4', '7', '1']
 
-    console.log(totalarr)
+    let longArray = data.length;
+
+    let value1 = parseInt(data.join(""));
+    let evaluate = value1.toString().length
+    let cutvalue2 = data.slice(evaluate+1, longArray);
+    let value2 = parseInt(cutvalue2.join(""));
+    let sing = data.slice(evaluate, evaluate+1);
+    
+    console.log(validateOperation(value1,sing[0],value2)) 
 
 }
 
