@@ -2,15 +2,33 @@ const DISPPLAY = document.querySelector("#calculator__display");
 const BUTTONS = document.querySelectorAll(".buttons");
 let values = []
 
+function validateOperation(value1,sing,value2){
+    return (sing == "+") ? value1+value2:
+    (sing == "-")? value1-value2:
+    (sing == "/")? value1/value2:
+    value1 * value2;
+}
+
+
 function saveValue(value){
     let resultArray = values.push(value)
+
 }
 
 function calculateOtion(){
     
 }
 
-function calculateValue(objet){
+
+
+function calculateValue(){
+    //let data = ["8","3","1","+","4","6"]
+    let data = ["+"]
+    let value1 = 8 + 7;
+    
+    let totalarr = Number(data.join(""));
+
+    console.log(totalarr)
 
 }
 
@@ -40,7 +58,6 @@ function getElement(elementHtml){
 }
 
 
-
-
+calculateValue()
 getElement(BUTTONS)
 

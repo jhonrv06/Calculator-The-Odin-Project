@@ -15,7 +15,8 @@
         -Al continuar el reduce este concatenara los valores de nuevo en la variable value 1
 
         finalmente hago la operacion con el valor de  value1 y value 2 depdiendo del signo
-
+    #3 opcion
+        -Convertir un rray en cadena y cortar la cadena con el signo y evaluar las 2 partes que obtuve
 
 #Calcular la accion a realizar
     EVALUATE cada vez que se ingresa un valor evaluar el array con la funcion
