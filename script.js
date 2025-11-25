@@ -27,7 +27,7 @@ function validateSings(data){
     }else if(data == "="){
         return true
     }
-   
+    saveValue(data)
    return (operator == 2) ? true: false
 }
 
@@ -35,12 +35,13 @@ function generateCalculation(data){
     
     if(data){
         
-        let value = calculateValue(values)
-        calculateValue(values);
+        let value = calculateValues(values)
+        calculateValues(values);
         removSpans();
-        displayOnScreem(calculateValue(values))
+        displayOnScreem(calculateValues(values))
         resetData()
         saveValue(value)
+        //el ultimo signo ingresado lo debo gurdar junto con el valor devuelto
         //devolver values a 0
     }
    
@@ -48,36 +49,26 @@ function generateCalculation(data){
 
 
 
-function calculateValue(objet){
-    
-
-    objet.forEach(element => {
-
-        //console.log(Number(element))
-        
-        if(Number.isNaN(Number(element))){
-            
-            console.log(element)
-            
-        }
-    })
-
-    
-    /*
+function calculateValues(objet){
+    let ind;
+    let sing;
     let longArray = objet.length;
 
-    let value1 = parseInt(objet.join(""));
-    let evaluate = value1.toString().length
-    let cutvalue2 = objet.slice(evaluate+1, longArray);
-    //ejecitar un metodo qu eme traiga la posicion del signo
-    //debo modificar el algoritmo ya que cuando el valor ingredo en el array es de dos digitos este me hace el objer.slice como si hubieran dos numeros en ela rray separados que se unieron
-    let value2 = parseInt(cutvalue2.join(""));
-    let sing = objet.slice(evaluate, evaluate+1);
+    objet.forEach((element, index) => {
+        if(Number.isNaN(Number(element))){
 
-    console.log("value1 es " + value1)
-    console.log("value2 es " + value2)*/
 
-    //return validateOperation(value1,sing[0],value2)
+            sing = element;
+            ind = index;
+        }
+    })
+    let cutArray = objet.slice(ind+1, longArray);
+
+    let value1 = parseInt(objet.join(""))
+    //al calular el valor me devulve 2 signos, el problema es que me devuleve el ultimo indice del mas
+    let value2 = parseInt(cutArray.join(""))
+    console.log(ind)
+    return validateOperation(value1,sing,value2)
 
 }
 
@@ -106,7 +97,6 @@ function displayOnScreem(data){
 function getEvents(element){
     element.addEventListener("click", (e) =>{
             const VALUEELEMENT = e.target.value;
-            saveValue(VALUEELEMENT)
             displayOnScreem(VALUEELEMENT)
             generateCalculation(validateSings(VALUEELEMENT))
         } )
