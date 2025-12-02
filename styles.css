@@ -1,5 +1,8 @@
 :root{
     --withContent: 400px;
+    --heightContent: 700px;
+    --gap: 5px;
+    --withCalculate: cal(var(--withContent) - var(--gap))
 }
 
 body{
@@ -9,11 +12,14 @@ body{
     align-items: center;
 }
 span{
-    color: rgb(114, 114, 114);
+    color: rgb(97, 97, 97);
+    font-weight: 800;
+    font-size: 50px;
 }
+
 #calculator{
     width: var(--withContent);
-    height: 700px;
+    height: var(--heightContent);
     border: 1px solid rgb(197, 197, 197);
     border-radius: 15px;
     box-shadow: 0 0 10px #5c5d5e6e;
@@ -29,16 +35,39 @@ span{
     align-items: center;
 }
 
-#calculator__buttons{
-    width: 100%;
+.calculator__buttons{
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: var(--gap)
 }
 
+.calculator__buttonsAll{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 500px;
+}
+
+.--numbers{
+    width: calc((var(--withContent)/4) * 3);
+}
+
+.--sings{
+    width:  calc((var(--withContent)/4));
+}
+
+.sing{
+    color: rgb(17, 122, 170);
+    font-size: 30px;
+    white-space: pre;
+}
 .buttons{
-    width: 100px;
-    margin: 0;
-    padding: 0;
+    width: 95px;
+    height: 95px;
+    margin: 0px;
+    padding: 0px;
+    border: 1px solid rgb(110, 110, 110);
+    border-radius: 5px;
     box-sizing: border-box;
 }

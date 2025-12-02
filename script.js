@@ -1,7 +1,7 @@
 const DISPPLAY = document.querySelector("#calculator__display");
 const BUTTONS = document.querySelectorAll(".buttons");
 let values = []
-let operator = 0;
+let sings = 0;
 
 function validateOperation(value1,sing,value2){
     return (sing == "+") ? value1+value2:
@@ -10,6 +10,7 @@ function validateOperation(value1,sing,value2){
     value1 * value2;
 }
 
+//debo evaluar si hay un signo y un punto
 
 function saveValue(value){
     if(value != "="){
@@ -17,64 +18,124 @@ function saveValue(value){
     }
 }
 
-function validateSings(data){
-    
-    const ALLSINGS = ["+","*","-","/"]
-    const EXISTSING = ALLSINGS.includes(data);
-
-    if(EXISTSING){
-        operator += 1;
-    }else if(data == "="){
-        return true
-    }
-    saveValue(data)
-   return (operator == 2) ? true: false
+function disableElement(accion){
+    accion.forEach( element =>{
+        if(element.value == "."){
+            element.disabled = returnAccion();
+        }
+    })
 }
 
-function generateCalculation(data){
+function returnSings(objet){
+//Return any sing selecte for the users
+    objet.forEach(element =>{
+        if(Number.isNaN(Number(element))){
+            sings = element;
+             
+        }
+    })
+
+    return sings
+   
+}
+
+function returnAccion(){
+//return true or false if the sing is a button
+    if(returnSings(values) == "."){
+        return true
+    }
+    return false
+}
+
+function deleteLastValue(objet){
+    objet.pop()
+    let result = values.join("")
+    return result
+}
+
+function validateDoubleSings(objet){
+    let count = 0;
+    objet.forEach(element =>{
+        if(Number.isNaN(Number(element)) && element != "."){
+            count += 1;
+        }
+    })
+
+    return count
+}
+
+function controler(data){
+
+    if(data == "<"){
+        removSpans()
+        displayOnScreem(deleteLastValue(values))
+        return
+    }
+
+    if(data == "CLEAR"){
+        resetData();
+        removSpans()
+        return
+    }
+    
+    saveValue(data)
+    disableElement(BUTTONS)
+    displayOnScreem(data)
+
+    if(data == "="){
+        return true
+    }
+
+    if(validateDoubleSings(values) == 2){
+        return (validateDoubleSings(values) == 2) ? true: false
+    }
+ 
+}
+
+function generateCalculation(data, sing){
     
     if(data){
-        
+        console.log(values)
         let value = calculateValues(values)
         calculateValues(values);
         removSpans();
-        displayOnScreem(calculateValues(values))
-        resetData()
-        saveValue(value)
-        //el ultimo signo ingresado lo debo gurdar junto con el valor devuelto
-        //devolver values a 0
+        displayOnScreem(calculateValues(values));
+        resetData();
+        saveValue(value);
+        saveValue(sing);
+        displayOnScreem(sing)
     }
    
 }
 
-
-
 function calculateValues(objet){
+
+    if(validateDoubleSings(objet) == 2){
+        objet.pop()
+    }
+    
     let ind;
     let sing;
     let longArray = objet.length;
 
     objet.forEach((element, index) => {
-        if(Number.isNaN(Number(element))){
-
-
+        if(Number.isNaN(Number(element)) && element != "."){
             sing = element;
             ind = index;
         }
     })
     let cutArray = objet.slice(ind+1, longArray);
 
-    let value1 = parseInt(objet.join(""))
-    //al calular el valor me devulve 2 signos, el problema es que me devuleve el ultimo indice del mas
-    let value2 = parseInt(cutArray.join(""))
-    console.log(ind)
+    let value1 = parseFloat(objet.join("")) || 0
+    let value2 = parseFloat(cutArray.join("")) || 0
+
+   
     return validateOperation(value1,sing,value2)
 
 }
 
 function resetData(){
     values = [];
-    operator = 0;
 }
 
 function removSpans(){
@@ -86,19 +147,32 @@ function removSpans(){
     
 }
 
-
 function displayOnScreem(data){
-    const SPAN = document.createElement("span");
-    SPAN.textContent = data;
+    let clasSpan = "number";
+    let displayData = `${data}`;
+    let allSing =["+", "-", "*", ".", "/"];
+
+    if (allSing.includes(data)){
+        clasSpan = "sing";
+        displayData = ` ${data} `;
+    }
     
-    DISPPLAY.appendChild(SPAN);
+    //evaluar si hay un signo contrue y si es true cambiar el nombre de la clase
+    if (data != "="){
+        const SPAN = document.createElement("span");
+        SPAN.textContent = displayData;
+        SPAN.classList.add(clasSpan)
+        DISPPLAY.appendChild(SPAN);
+    }
+    
 }
 
 function getEvents(element){
     element.addEventListener("click", (e) =>{
             const VALUEELEMENT = e.target.value;
-            displayOnScreem(VALUEELEMENT)
-            generateCalculation(validateSings(VALUEELEMENT))
+
+            generateCalculation(controler(VALUEELEMENT), VALUEELEMENT)
+            
         } )
 }
 
@@ -108,6 +182,6 @@ function getElement(elementHtml){
     } )
 }
 
-
+displayOnScreem(0)
 getElement(BUTTONS)
 

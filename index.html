@@ -10,26 +10,32 @@
     <h1>Your calculator </h1>
    <div id="calculator">
         <div id="calculator__display">
-           
         </div> <!-- Debo comprobar si ya hay un signo en la cadena de texto cada que seingrese un signo-->
-        <div id="calculator__buttons">
-            <input class="buttons" type="button" value="9">
-            <input class="buttons" type="button" value="8">
-            <input class="buttons" type="button" value="7">
-            <input class="buttons" type="button" value="6">
-            <input class="buttons" type="button" value="5">
-            <input class="buttons" type="button" value="4">
-            <input class="buttons" type="button" value="3">
-            <input class="buttons" type="button" value="2">
-            <input class="buttons" type="button" value="1">
-            <input class="buttons" type="button" value="0">
-            <input class="buttons" type="button" value="+">
-            <input class="buttons" type="button" value="-">
-            <input class="buttons" type="button" value="*">
-            <input class="buttons" type="button" value="/">
-            <input class="buttons" type="button" value="=">
+        <div class="calculator__buttonsAll">
+            <div class="calculator__buttons --numbers">
+                <input class="buttons" type="button" value="<">
+                <input class="buttons" type="button" value="9">
+                <input class="buttons" type="button" value="8">
+                <input class="buttons" type="button" value="7">
+                <input class="buttons" type="button" value="6">
+                <input class="buttons" type="button" value="5">
+                <input class="buttons" type="button" value="4">
+                <input class="buttons" type="button" value="3">
+                <input class="buttons" type="button" value="2">
+                <input class="buttons" type="button" value="1">
+                <input class="buttons" type="button" value="0">
+                <input class="buttons" type="button" value="CLEAR">
+                <input class="buttons" type="button" value="." >
+            </div>
+            <div class="calculator__buttons --sings">
+                <input class="buttons" type="button" value="+">
+                <input class="buttons" type="button" value="-">
+                <input class="buttons" type="button" value="*">
+                <input class="buttons" type="button" value="/">
+                <input class="buttons" type="button" value="=">
+            </div>
         </div>
-        <script src="script.js"></script>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
