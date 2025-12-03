@@ -64,9 +64,15 @@ function validateDoubleSings(objet){
     return count
 }
 
+function resetWhenEmpty(objet){
+    if(objet.length == 0){
+        removSpans()
+    }
+}
+
 function controler(data){
 
-    if(data == "<"){
+    if(data == "<" || data =="Backspace"){
         removSpans()
         displayOnScreem(deleteLastValue(values))
         return
@@ -74,13 +80,15 @@ function controler(data){
 
     if(data == "CLEAR"){
         resetData();
-        removSpans()
+        removSpans();
+        displayOnScreem(0);
         return
     }
-    
-    saveValue(data)
-    disableElement(BUTTONS)
-    displayOnScreem(data)
+    console.log(values)
+    resetWhenEmpty(values);
+    saveValue(data);
+    disableElement(BUTTONS);
+    displayOnScreem(data);
 
     if(data == "="){
         return true
@@ -169,12 +177,23 @@ function displayOnScreem(data){
 
 function getEvents(element){
     element.addEventListener("click", (e) =>{
-            const VALUEELEMENT = e.target.value;
+            const VALUEELEMENT = e.target.name;
 
             generateCalculation(controler(VALUEELEMENT), VALUEELEMENT)
             
         } )
-}
+}8
+
+
+    document.addEventListener("keydown", (e) =>{
+            const VALUEELEMENT = e.key;
+
+            //debo crear una funcion que me evalue la tecla presionada y me devuelva true si es correcta
+           
+           generateCalculation(controler(VALUEELEMENT), VALUEELEMENT)
+            
+        } )
+
 
 function getElement(elementHtml){
     elementHtml.forEach(element =>{

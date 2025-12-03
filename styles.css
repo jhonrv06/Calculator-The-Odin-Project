@@ -5,6 +5,10 @@
     --withCalculate: cal(var(--withContent) - var(--gap))
 }
 
+h1{
+    color: #F15151
+}
+
 body{
     display: flex;
     flex-direction: column;
@@ -15,6 +19,10 @@ span{
     color: rgb(97, 97, 97);
     font-weight: 800;
     font-size: 50px;
+}
+
+input{
+    font-size: 20px;
 }
 
 #calculator{
@@ -51,6 +59,8 @@ span{
 
 .--numbers{
     width: calc((var(--withContent)/4) * 3);
+    display: flex;
+    justify-content: center;
 }
 
 .--sings{
@@ -70,4 +80,11 @@ span{
     border: 1px solid rgb(110, 110, 110);
     border-radius: 5px;
     box-sizing: border-box;
+}
+
+.__erase{
+    background-image: url('./assets/backspace.svg');
+    background-repeat: no-repeat;
+    background-position:  center;
+    
 }
