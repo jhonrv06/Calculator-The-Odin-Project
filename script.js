@@ -13,7 +13,7 @@ function validateOperation(value1,sing,value2){
 //debo evaluar si hay un signo y un punto
 
 function saveValue(value){
-    if(value != "="){
+    if(value != "=" && value != "Enter"){
         values.push(value)
     }
 }
@@ -34,9 +34,21 @@ function returnSings(objet){
              
         }
     })
-
     return sings
-   
+}
+
+function validateKeys(key){
+    let keys =["/","*","-",".","+","Backspace","Enter"];
+
+    for(let i = 0; i <= 9; i++){    
+        keys.push(String(i))
+    }
+
+    if(keys.includes(key)){
+        return true;
+    }
+
+    return false;
 }
 
 function returnAccion(){
@@ -72,7 +84,7 @@ function resetWhenEmpty(objet){
 
 function controler(data){
 
-    if(data == "<" || data =="Backspace"){
+    if(data == "<" || data == "Backspace"){
         removSpans()
         displayOnScreem(deleteLastValue(values))
         return
@@ -84,15 +96,17 @@ function controler(data){
         displayOnScreem(0);
         return
     }
-    console.log(values)
+    console.log(data)
+     if(data == "=" || data == "Enter"){
+        return true
+    }
+
     resetWhenEmpty(values);
     saveValue(data);
     disableElement(BUTTONS);
     displayOnScreem(data);
 
-    if(data == "="){
-        return true
-    }
+   
 
     if(validateDoubleSings(values) == 2){
         return (validateDoubleSings(values) == 2) ? true: false
@@ -166,7 +180,7 @@ function displayOnScreem(data){
     }
     
     //evaluar si hay un signo contrue y si es true cambiar el nombre de la clase
-    if (data != "="){
+    if (data != "=" && data != "Enter"){
         const SPAN = document.createElement("span");
         SPAN.textContent = displayData;
         SPAN.classList.add(clasSpan)
@@ -182,15 +196,14 @@ function getEvents(element){
             generateCalculation(controler(VALUEELEMENT), VALUEELEMENT)
             
         } )
-}8
-
+}
 
     document.addEventListener("keydown", (e) =>{
             const VALUEELEMENT = e.key;
-
             //debo crear una funcion que me evalue la tecla presionada y me devuelva true si es correcta
-           
-           generateCalculation(controler(VALUEELEMENT), VALUEELEMENT)
+            if(validateKeys(VALUEELEMENT)){
+                generateCalculation(controler(VALUEELEMENT), VALUEELEMENT)
+            }
             
         } )
 
