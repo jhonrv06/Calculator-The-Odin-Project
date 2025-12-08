@@ -4,7 +4,6 @@ let values = []
 let sings = 0;
 
 function validateOperation(value1,sing,value2){
-    console.log(values)
     return (sing == "+") ? value1+value2:
     (sing === "-")? value1-value2:
     (sing === "/")? value1/value2:
@@ -118,7 +117,6 @@ function controler(data){
 function generateCalculation(data, sing){
     
     if(data){
-        console.log(values)
         let value = calculateValues(values)
         calculateValues(values);
         removSpans();
