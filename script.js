@@ -169,6 +169,8 @@ function removSpans(){
 }
 
 function displayOnScreem(data){
+
+    
     let clasSpan = "number";
     let displayData = `${data}`;
     let allSing =["+", "-", "*", ".", "/"];
@@ -176,6 +178,10 @@ function displayOnScreem(data){
     if (allSing.includes(data)){
         clasSpan = "sing";
         displayData = ` ${data} `;
+    }
+
+    if(data == Infinity){
+        displayData = "Sorry, you can't divide by 0!"
     }
     
     //evaluar si hay un signo contrue y si es true cambiar el nombre de la clase
