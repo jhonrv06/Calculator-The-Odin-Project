@@ -4,10 +4,12 @@ let values = []
 let sings = 0;
 
 function validateOperation(value1,sing,value2){
+    console.log(values)
     return (sing == "+") ? value1+value2:
-    (sing == "-")? value1-value2:
-    (sing == "/")? value1/value2:
-    value1 * value2;
+    (sing === "-")? value1-value2:
+    (sing === "/")? value1/value2:
+    (sing === "*")? value1*value2:
+    value1;
 }
 
 //debo evaluar si hay un signo y un punto
@@ -96,7 +98,6 @@ function controler(data){
         displayOnScreem(0);
         return
     }
-    console.log(data)
      if(data == "=" || data == "Enter"){
         return true
     }
